@@ -1,0 +1,21 @@
+# emailsenderconfig.yaml
+apiVersion: mail.mailertest.com/v1alpha1
+kind: EmailSenderConfig
+metadata:
+  name: test-config
+spec:
+  apiTokenSecretRef: mailer-api-token
+  senderEmail: sender@mailer.com
+
+---
+
+# email.yaml
+apiVersion: mail.mailertest.com/v1alpha1
+kind: Email
+metadata:
+  name: test-email
+spec:
+  senderConfigRef: test-config
+  recipientEmail: test@mailer.com
+  subject: "Test Email Subject"
+  body: "Hello from the Kubernetes operator!"

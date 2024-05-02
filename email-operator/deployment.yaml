@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: email-operator
+  namespace: email-operator-system
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: email-operator
+  namespace: email-operator-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      control-plane: controller-manager
+  template:
+    metadata:
+      labels:
+        control-plane: controller-manager
+    spec:
+      serviceAccountName: email-operator
+      containers:
+      - name: email-operator
+        image: abiola89/email-operator:v1.0.0
+        resources:
+          requests:
+            cpu: "800m"
+            memory: "256Mi"
+          limits:
+            cpu: "800m"
+            memory: "256Mi"
+        args:
+          - "--leader-elect"
+      terminationGracePeriodSeconds: 10
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mailer-api-token
+type: Opaque
+data:
+  apiToken: <base64-encoded-api-token>

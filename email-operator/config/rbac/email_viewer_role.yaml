@@ -1,0 +1,23 @@
+# permissions for end users to view emails.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: email-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: email-viewer-role
+rules:
+- apiGroups:
+  - mail.mailertest.com
+  resources:
+  - emails
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - mail.mailertest.com
+  resources:
+  - emails/status
+  verbs:
+  - get
