@@ -45,7 +45,7 @@ make deploy IMG="abiola89/email-operator:v1.0.0"
 
 **Usage and testing**
 
-First, create a Kubernetes secret that contains the API token for your email service provider (e.g., MailerSend).
+First, create a Kubernetes secret that contains the API token for tne email service provider.
 
 Create an EmailSenderConfig resource to specify the sender's email and API token
 
@@ -64,8 +64,8 @@ spec:
   body: "Hello, this is a test email sent via the Email Operator."
 ```
 
-Send the Email:
-Apply the Email resource to your cluster to trigger the sending process.
+
+Apply the Email resource to your cluster.
 ```bash
 kubectl apply -f email.yaml
 ```
@@ -82,6 +82,8 @@ You can also test from testmail.yaml
 You can describe the crd using
 
 `kubectl describe crd emails.mail.mailertest.com `
+
+When a new Email is created, the operator should send the email using the provided sender configuration and MailerSend API
 
 
 ## K8s deployment

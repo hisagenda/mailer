@@ -10,7 +10,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: email-operator
-  namespace: email-operator-system
+  namespace: default
 spec:
   replicas: 1
   selector:
@@ -43,4 +43,4 @@ metadata:
   name: mailer-api-token
 type: Opaque
 data:
-  apiToken: <base64-encoded-api-token>
+  apiToken: YWJpb2xhODk6
